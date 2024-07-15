@@ -1,0 +1,81 @@
+print('Введите текст:') 
+
+text = input() 
+
+ 
+
+filters = { 
+
+    1: { 
+
+        "name": "CaMeL Filter", 
+
+        "description": "Преобразует текст в формат CamelCase (нет пробелов и первая буква каждого слова заглавная).", 
+
+        "function": lambda text: ''.join([word.capitalize() for word in text.split()]) 
+
+    }, 
+
+    2: { 
+
+        "name": "snake_strings Filter", 
+
+        "description": "Преобразует текст в формат snake_case (все пробелы заменяются на нижнее подчёркивание).", 
+
+        "function": lambda text: text.replace(" ", "_") 
+
+    }, 
+
+    3: { 
+
+        "name": "SHOUTING Filter", 
+
+        "description": "Преобразует все буквы в заглавные (крик).", 
+
+        "function": lambda text: text.upper() 
+
+    } 
+
+} 
+
+ 
+
+def main(): 
+
+    print("Приветствуем в программе фильтрации текста!") 
+
+    while True: 
+
+        print("\nВыберите фильтр, который хотите применить:") 
+
+        for key, value in filters.items(): 
+
+            print(f"{key}) {value['name']} - {value['description']}") 
+
+ 
+
+        choice = input("Введите номер фильтра, который хотите применить (или 'выход' для завершения): ").lower() 
+
+        if choice == "выход": 
+
+            break 
+
+ 
+
+        if choice.isdigit() and int(choice) in filters: 
+
+            chosen_filter = filters[int(choice)] 
+
+            result = chosen_filter["function"](text) 
+
+            print(f"\nРезультат применения фильтра '{chosen_filter['name']}' к тексту:") 
+
+            print(result) 
+
+        else: 
+
+            print("Неверный выбор. Пожалуйста, выберите номер фильтра из списка.") 
+
+ 
+
+main() 
